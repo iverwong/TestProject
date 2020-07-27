@@ -12,8 +12,14 @@ public class test : MonoBehaviour
             Object cardUI = Resources.Load("CardUI");
             GameObject prefebCardUI;
             prefebCardUI = PrefabUtility.InstantiatePrefab(cardUI) as GameObject;
-            Card_TestAttack test = new Card_TestAttack("测试名称", "测试描述", "0x0ss-85", null, new Vector3Int());
+            //Resources.UnloadAsset 待学习
+            Card_TestAttack test = new Card_TestAttack("测试名称", "测试描述", "0x0ss-85", null, new Vector3Int(),new CardGenericTrigger_PointTest());//new关键词待更改
             prefebCardUI.GetComponent<CardUI>().Initialize(test); 
+        }
+        if (GUILayout.Button("测试"))
+        {
+            StateMachine.waitCommand = FindObjectOfType<BattleArea_Object_Camp_Role>();
+            StateMachine.RoleTurn();
         }
     }
 }

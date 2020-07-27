@@ -70,9 +70,11 @@
     <Compile Include="Assets\Prefabs\Character\HeavyKnight\HeavyKnightAnimationControl.cs" />
     <Compile Include="Assets\Prefabs\Character\Jackdaw\JackdawAnimationControl.cs" />
     <Compile Include="Assets\Prefabs\Character\Shadow\ShadowAnimationControl.cs" />
-    <Compile Include="Assets\Scripts\Card\CardType_Attack\Card_TestAttack.cs" />
+    <Compile Include="Assets\Scripts\Card\CardType\Card_TestAttack.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardAbstract.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardAttribute.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardGenericTrigger\CardGenericTrigger.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardGenericTrigger\CardGenericTrigger_PointTest.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardType.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardUI.cs" />
     <Compile Include="Assets\Scripts\Class\BattleArea_Grid\BattleArea_Grid.cs" />

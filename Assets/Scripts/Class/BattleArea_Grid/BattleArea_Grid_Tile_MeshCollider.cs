@@ -68,6 +68,7 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
         {
             case BattleArea_Grid.BattleArea_Grid_State.NONE:
                 break;
+            //角色移动
             case BattleArea_Grid.BattleArea_Grid_State.COMMANDER:
 
                 if (tile.plane.IsLight())
