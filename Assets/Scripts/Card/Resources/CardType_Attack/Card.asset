@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16f105e62063294d9b9daaeed7b02f0, type: 3}
+  m_Name: Card
+  m_EditorClassIdentifier: 
+  CardType: 0
+  CardImage: {fileID: 2800000, guid: aebcbaf5d1d2146bf9ff69b1b95334d6, type: 3}
+  CardName: "\u6D4B\u8BD5\u540D\u79F0"
+  CardDescription: "\u6D4B\u8BD5\u63CF\u8FF0"
+  CardBackstory: "\u6D4B\u8BD5\u80CC\u666F"
+  HPCost: 20
+  SPCost: 20
+  MPCost: 20
+  ListCardAttribute:
+  - {fileID: 11400000, guid: 7ee6c5152ac3b2e4aa03ec0b158cc750, type: 2}
+  CardTrigger: {fileID: 11400000, guid: 0ae2907b8d7d5ed47b958d0d477e67ef, type: 2}
+  ListCardAction:
+  - {fileID: 11400000, guid: f65fab4972bf7bb40af4eeff4678a0bb, type: 2}
+  - {fileID: 11400000, guid: 42ced08eb5b0db24db849e88d45f7d52, type: 2}

@@ -16,8 +16,8 @@ public class BattleArea_Grid_Tile : MonoBehaviour
     [Header("Info")]
     public BattleAreaCoordinate coordinate;
 
-    [Header("ObjectTransform")]
-    public Transform objectOnIt;
+    [Header("Object")]
+    public BaseInteractableObject objectOnIt;
 
     private void Start()
     {
@@ -25,5 +25,13 @@ public class BattleArea_Grid_Tile : MonoBehaviour
         int x = int.Parse(strings[strings.Length-2]);
         int y = int.Parse(strings[strings.Length-1]);
         coordinate = new BattleAreaCoordinate(x, y);
+    }
+
+    private void OnDrawGizmos()
+    {
+        string[] strings = this.name.Split('_');
+        int x = int.Parse(strings[strings.Length - 2]);
+        int y = int.Parse(strings[strings.Length - 1]);
+        UnityEditor.Handles.Label(transform.position, string.Format("({0},{1})", x, y));
     }
 }

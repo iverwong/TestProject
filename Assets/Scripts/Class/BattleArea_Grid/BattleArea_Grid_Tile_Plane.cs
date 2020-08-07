@@ -13,9 +13,19 @@ public class BattleArea_Grid_Tile_Plane : MonoBehaviour
     {
         sr.enabled = true;
     }
+    public void LightOn(Color color)
+    {
+        sr.color = color;
+        LightOn();
+    }
     public void LightOff()
     {
         sr.enabled = false;
+    }
+    public void LightOff(Color color)
+    {
+        sr.color = color;
+        LightOff();
     }
     public bool IsLight()
     {

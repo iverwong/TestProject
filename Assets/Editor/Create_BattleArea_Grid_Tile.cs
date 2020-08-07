@@ -9,12 +9,13 @@ public class Create_BattleArea_Grid_Tile
     static void CreateTile()
     {
         //此处定义生成地图的大小
-        const int WIDTH = 6;
-        const int HEIGHT = 6;
+        const int WIDTH = 40;
+        const int HEIGHT = 40;
         //创建一个BattleArea_Grid空物体用于管理层级
         GameObject grid = new GameObject("BattleArea_Grid");
+        grid.AddComponent(typeof(BattleArea_Grid));
         //获取Asset中的prefab资源
-        Object prefabAsset = Resources.Load("BattleArea_Grid_Tile");
+        Object prefabAsset = Resources.Load("Prefabs/BattleArea_Grid_Tile");
         //循环创建响应大小的网格
         GameObject prefabObject;
         for (int y = 0; y < HEIGHT; y++)
