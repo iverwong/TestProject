@@ -40,7 +40,7 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
                 }
                 break;
             case BattleArea_Grid.BattleArea_Grid_State.HOLDER:
-                tile.frame.LightOn();
+                StateMachine.currentCard.CardTrigger.FrameSign(this);
                 break;
         }
     }
@@ -66,7 +66,7 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
                 }
                 break;
             case BattleArea_Grid.BattleArea_Grid_State.HOLDER:
-                tile.frame.LightOff();
+                StateMachine.currentCard.CardTrigger.EndFrameSign(this);
                 break;
         }
     }
@@ -106,18 +106,14 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
                 }
                 //不再显示当前地块外框
                 OnMouseExit();
-                //将目标添加到StateMachine中
-                switch (StateMachine.triggerType)
-                {
-                    //round_point点目标
-                    case CardTargetTrigger.TriggerType.ROUND_POINT:
-                        if (tile.objectOnIt != null) StateMachine.listRole.Add(tile.objectOnIt);
-                        break;
-                }
                 //取消Trigger所标记的地块
-                StateMachine.currentCard.CardTrigger.Trigger(reverse: true);
-                //触发Action列表
-                StateMachine.currentCard.Action();
+                StateMachine.currentCard.CardTrigger.EndTrigger();
+                //将目标添加到StateMachine中
+                List<BaseInteractableObject> targets = StateMachine.currentCard.CardTrigger.CatchTarget(this);
+                //对目标进行action操作
+                targets = StateMachine.currentCard.Action(targets);
+                //回到commander状态
+                StateMachine.state = BattleArea_Grid.BattleArea_Grid_State.COMMANDER;
                 break;
         }
     }

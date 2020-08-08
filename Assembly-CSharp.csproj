@@ -71,10 +71,13 @@
     <Compile Include="Assets\Prefabs\Character\Jackdaw\JackdawAnimationControl.cs" />
     <Compile Include="Assets\Prefabs\Character\Shadow\ShadowAnimationControl.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardAbstract.cs" />
-    <Compile Include="Assets\Scripts\Card\Core\CardAction.cs" />
-    <Compile Include="Assets\Scripts\Card\Core\CardAttribute.cs" />
-    <Compile Include="Assets\Scripts\Card\Core\CardTargetTrigger.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardAction\CardAction_Test.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardActionAbstract.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardAttributeAbstract.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardTrigger\CardTrigger_Test.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardTriggerAbstract.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardType.cs" />
+    <Compile Include="Assets\Scripts\Card\Resources\CardType_Attack\Card_Test.cs" />
     <Compile Include="Assets\Scripts\Class\BattleArea_Grid\BattleArea_Grid.cs" />
     <Compile Include="Assets\Scripts\Class\BattleArea_Grid\BattleArea_Grid_Tile.cs" />
     <Compile Include="Assets\Scripts\Class\BattleArea_Grid\BattleArea_Grid_Tile_Frame.cs" />

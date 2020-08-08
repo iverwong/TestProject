@@ -8,15 +8,8 @@ public static class StateMachine
 {
     //当前战场状态
     public static BattleArea_Grid.BattleArea_Grid_State state = BattleArea_Grid.BattleArea_Grid_State.NONE;
-    //当前触发器状态
-    public static CardTargetTrigger.TriggerType triggerType = CardTargetTrigger.TriggerType.NONE;
-    //当前目标列表
-    public static List<BaseInteractableObject> listRole = new List<BaseInteractableObject>();
-    //当前筛选器列表（通过GROUP动作重置）
-    public static List<BaseInteractableObject> listAfterTrigger = new List<BaseInteractableObject>();
     //当前控制卡牌
     public static CardAbstract currentCard = null;
-
     //当前玩家控制的角色，如为空则不为玩家控制阶段
     public static BattleArea_Object_Camp_Role waitCommand;
 
@@ -25,10 +18,11 @@ public static class StateMachine
     //到达玩家回合(测试）
     public static void RoleTurn()
     {
-        //初始化亮起移动区域
-        RoleMovePlaneLightOnOff(true, 20);
         //更改状态
         state = BattleArea_Grid.BattleArea_Grid_State.COMMANDER;
+        //初始化亮起移动区域
+        RoleMovePlaneLightOnOff(true, 10);
+
     }
 
     /// <summary>
@@ -54,5 +48,6 @@ public static class StateMachine
             }
 
         }
+
     }
 } 

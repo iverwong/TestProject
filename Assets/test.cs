@@ -11,11 +11,11 @@ public class test : MonoBehaviour
         {
             Object cardUI = Resources.Load("UI/CardUI");
             GameObject prefebCardUI;
-            prefebCardUI = PrefabUtility.InstantiatePrefab(cardUI) as GameObject;
+            prefebCardUI = (GameObject)PrefabUtility.InstantiatePrefab(cardUI);
             //载入资源
             CardUI cardUIScript = prefebCardUI.GetComponent<CardUI>();
-            cardUIScript.card = Resources.Load<CardAbstract>("CardType_Attack/Card");
-            cardUIScript.Initialize(); 
+            cardUIScript.card = new Card_Test();
+            cardUIScript.Init(); 
         }
         if (GUILayout.Button("测试"))
         {
