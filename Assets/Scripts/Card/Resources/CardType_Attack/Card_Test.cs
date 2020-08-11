@@ -6,15 +6,13 @@ public class Card_Test : CardAbstract
 {
     public override CardType CardType => CardType.Attack;
 
-    public override Texture CardImage => (Texture)Resources.Load("Textures/Test");
+    public override Sprite CardImage => Resources.Load<Sprite>("Textures/CardImage/test");
 
     public override string CardName => "测试";
 
     public override string CardDescription => "测试描述";
 
     public override string CardBackstory => "测试背景故事";
-
-    public override List<CardAttributeAbstract> ListCardAttributes => new List<CardAttributeAbstract>();
 
     public override CardTriggerAbstract CardTrigger => new CardTrigger_Test(3);
 
@@ -23,6 +21,11 @@ public class Card_Test : CardAbstract
         CardAction_Test hurt = new CardAction_Test(20);
         List<BaseInteractableObject> results =  hurt.Action(_targets);
         return results;
+    }
+
+    public override CardAbstract Clone()
+    {
+        return new Card_Test();
     }
 
     public override void Draw()

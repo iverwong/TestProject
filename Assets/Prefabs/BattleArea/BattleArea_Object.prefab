@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 303463782715166824}
+  - component: {fileID: 129772944803522665}
   m_Layer: 0
   m_Name: BattleArea_Object_Camp0_Role0
   m_TagString: Untagged
@@ -62,6 +63,28 @@ Transform:
   m_Father: {fileID: 303463783213982838}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &129772944803522665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303463782715166827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d86adbf3d3cef48ba9e57fe572fcdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standOn: {fileID: 0}
+  HP: 0
+  SP: 0
+  MP: 0
+  CON: 0
+  STR: 0
+  AGI: 0
+  DEX: 0
+  WIL: 0
+  LOG: 0
 --- !u!1 &303463783213982833
 GameObject:
   m_ObjectHideFlags: 0
