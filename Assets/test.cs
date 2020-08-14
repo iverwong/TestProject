@@ -20,7 +20,7 @@ public class test : MonoBehaviour
         if (GUILayout.Button("发牌"))
         {
             //获取一个卡牌实例
-            StateMachine.waitCommand.DrawCard(2);
+            StateMachine.waitCommand.DrawCard(1);
         }
     }
 }

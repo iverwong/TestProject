@@ -13,7 +13,10 @@ public class CardTrigger_Test : CardTriggerAbstract
     public override List<BaseInteractableObject> CatchTarget(BattleArea_Grid_Tile_MeshCollider _meshCollider)
     {
         List<BaseInteractableObject> result = new List<BaseInteractableObject>();
-        result.Add(_meshCollider.tile.objectOnIt);
+        if (_meshCollider.tile.objectOnIt != null)
+        {
+            result.Add(_meshCollider.tile.objectOnIt);
+        }
         return result;
     }
 

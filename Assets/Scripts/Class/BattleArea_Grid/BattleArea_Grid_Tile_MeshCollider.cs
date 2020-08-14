@@ -40,7 +40,7 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
                 }
                 break;
             case BattleArea_Grid.BattleArea_Grid_State.HOLDER:
-                StateMachine.currentCard.CardTrigger.FrameSign(this);
+                StateMachine.currentCard.card.CardTrigger.FrameSign(this);
                 break;
         }
     }
@@ -66,7 +66,7 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
                 }
                 break;
             case BattleArea_Grid.BattleArea_Grid_State.HOLDER:
-                StateMachine.currentCard.CardTrigger.EndFrameSign(this);
+                StateMachine.currentCard.card.CardTrigger.EndFrameSign(this);
                 break;
         }
     }
@@ -104,16 +104,19 @@ public class BattleArea_Grid_Tile_MeshCollider : MonoBehaviour
                     Debug.Log("技能施放在允许的范围外");
                     return;
                 }
-                //不再显示当前地块外框
-                OnMouseExit();
-                //取消Trigger所标记的地块
-                StateMachine.currentCard.CardTrigger.EndTrigger();
                 //将目标添加到StateMachine中
-                List<BaseInteractableObject> targets = StateMachine.currentCard.CardTrigger.CatchTarget(this);
-                //对目标进行action操作
-                targets = StateMachine.currentCard.Action(targets);
-                //回到commander状态
-                StateMachine.state = BattleArea_Grid.BattleArea_Grid_State.COMMANDER;
+                List<BaseInteractableObject> targets = StateMachine.currentCard.card.CardTrigger.CatchTarget(this);
+                if (targets.Count != 0)//至少包含一个目标的情况下
+                {
+                    //不再显示当前地块外框
+                    OnMouseExit();
+                    //取消Trigger所标记的地块
+                    StateMachine.currentCard.card.CardTrigger.EndTrigger();
+                    //对目标进行action操作
+                    targets = StateMachine.currentCard.card.Action(targets);
+                    //回到commander状态
+                    StateMachine.state = BattleArea_Grid.BattleArea_Grid_State.COMMANDER;
+                }
                 break;
         }
     }

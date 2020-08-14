@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CardUI : MonoBehaviour,System.IComparable<CardUI>
+public class CardUI : MonoBehaviour, System.IComparable<CardUI>
 {
     public CardAbstract card;
     public GameObject selectedFrame;
-    public Transform cardTransform;
+    public RectTransform cardTransform;
     private int originalOrder;
     public Canvas canvas;
 
@@ -61,32 +61,88 @@ public class CardUI : MonoBehaviour,System.IComparable<CardUI>
     /// </summary>
     public void Click()
     {
-        //将战斗状态调整为卡牌持有状态
-        StateMachine.state = BattleArea_Grid.BattleArea_Grid_State.HOLDER;
-        //点灭周围移动地块
-        StateMachine.RoleMovePlaneLightOnOff(false, 20);
-        StateMachine.currentCard = card;
-        card.Use();
+        if (StateMachine.currentCard != this)
+        {
+            //将战斗状态调整为卡牌持有状态
+            StateMachine.state = BattleArea_Grid.BattleArea_Grid_State.HOLDER;
+            //点灭周围移动地块
+            StateMachine.RoleMovePlaneLightOnOff(false, 20);
+            MouseExit();
+            //卡牌进入待选取
+            if (StateMachine.currentCard == null)
+            {
+                MoveToCurrentCard();
+            }
+            else
+            {
+                StateMachine.currentCard.MoveToHandleCard();
+                MoveToCurrentCard();
+            }
+            card.Use();//调用卡抽象类的Use方法
+        }
+    }
+    /// <summary>
+    /// 将CardUI物体移动至手持状态（UI左侧）
+    /// </summary>
+    public void MoveToCurrentCard()
+    {
+        //移动至屏幕左边
+        cardTransform.anchorMin = new Vector2(0f, 0.5f);
+        cardTransform.anchorMax = new Vector2(0f, 0.5f);
+        cardTransform.pivot = new Vector2(0f, 0.5f);
+        cardTransform.anchoredPosition = Vector3.zero;
+        //配置当前选中卡牌
+        StateMachine.currentCard = this;
+        //将该卡片从CardUI列表移出
+        StateMachine.handleCardUI.Remove(this);
+        //重排序
+        StateMachine.OrderHandleCardUI();
+    }
+    /// <summary>
+    /// 将CardUI物体移动至手牌持有状态（UI底部）
+    /// </summary>
+    public void MoveToHandleCard()
+    {
+        //移至屏幕底部
+        cardTransform.anchorMin = new Vector2(0.5f, 0f);
+        cardTransform.anchorMax = new Vector2(0.5f, 0f);
+        cardTransform.pivot = new Vector2(0.5f, 0f);
+        //将卡牌移入CardUI列表
+        StateMachine.handleCardUI.Add(this);
+        //重置当前卡牌
+        StateMachine.currentCard = null;
+        //重排序
+        StateMachine.OrderHandleCardUI();
     }
 
     /// <summary>
-    /// 卡牌划过，显示外框
+    /// 鼠标划入卡牌，显示外框
     /// </summary>
     public void MouseEnter()
     {
-        canvas.sortingOrder = 200;
-        selectedFrame.SetActive(true);
+        if (StateMachine.currentCard != this)
+        {
+            canvas.sortingOrder = 200;
+            selectedFrame.SetActive(true);
+        }
     }
 
+    /// <summary>
+    /// 鼠标划出卡牌，隐藏外框
+    /// </summary>
     public void MouseExit()
     {
-        canvas.sortingOrder = originalOrder;
-        selectedFrame.SetActive(false);
+        if (StateMachine.currentCard != this)
+        {
+            canvas.sortingOrder = originalOrder;
+            selectedFrame.SetActive(false);
+        }
     }
 
     public void MoveToPosition(float _x)
     {
-        cardTransform.localPosition = new Vector3(_x, 0f, 0f);
+        cardTransform.anchoredPosition = new Vector3(_x, 0f, 0f);
+
     }
 
     /// <summary>
@@ -98,7 +154,11 @@ public class CardUI : MonoBehaviour,System.IComparable<CardUI>
         originalOrder = _x;
         canvas.sortingOrder = _x;
     }
-
+    /// <summary>
+    /// 实现CompareTo接口，实现以卡牌种类、卡牌名称进行排序
+    /// </summary>
+    /// <param name="other">另一张卡牌</param>
+    /// <returns>int返回结果，小于、等于、大于0的情况</returns>
     public int CompareTo(CardUI other)
     {
         int result = this.card.CardType.CompareTo(other.card.CardType);

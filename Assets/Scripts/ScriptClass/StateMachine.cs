@@ -12,8 +12,8 @@ public static class StateMachine
     public static bool isPause = false;
     //手牌栏
     public static List<CardUI> handleCardUI = new List<CardUI>();
-    //当前控制卡牌
-    public static CardAbstract currentCard = null;
+    //当前控制卡牌UI
+    public static CardUI currentCard = null;
     //当前玩家控制的角色，如为空则不为玩家控制阶段
     public static BattleArea_Object_Camp_Role waitCommand;
 
