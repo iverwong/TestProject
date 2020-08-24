@@ -71,9 +71,15 @@
     <Compile Include="Assets\Prefabs\Character\HeavyKnight\HeavyKnightAnimationControl.cs" />
     <Compile Include="Assets\Prefabs\Character\Jackdaw\JackdawAnimationControl.cs" />
     <Compile Include="Assets\Prefabs\Character\Shadow\ShadowAnimationControl.cs" />
-    <Compile Include="Assets\Scripts\Buff\BuffAbstract.cs" />
+    <Compile Include="Assets\Scripts\Buff\Buff_test.cs" />
+    <Compile Include="Assets\Scripts\Buff\Core\BuffAbstract.cs" />
+    <Compile Include="Assets\Scripts\Buff\Core\BuffType.cs" />
+    <Compile Include="Assets\Scripts\Buff\Core\IBuffHarm.cs" />
+    <Compile Include="Assets\Scripts\Buff\Core\RoleBuffAbstract.cs" />
+    <Compile Include="Assets\Scripts\Buff\Core\TileBuffAbstract.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardAbstract.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardActions.cs" />
+    <Compile Include="Assets\Scripts\Card\Core\CardFilters.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardTrigger\CardTrigger_Test.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardTriggerAbstract.cs" />
     <Compile Include="Assets\Scripts\Card\Core\CardType.cs" />

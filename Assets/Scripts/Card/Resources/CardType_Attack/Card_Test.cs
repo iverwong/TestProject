@@ -4,43 +4,35 @@ using UnityEngine;
 
 public class Card_Test : CardAbstract
 {
-    private CardType _cardType = CardType.Attack;
-    public override CardType CardType => _cardType;
-
-
-    private Sprite _cardImage = Resources.Load<Sprite>("Textures/CardImage/test");
-    public override Sprite CardImage => _cardImage;
-
-
-    private string _cardName = "测试";
-    public override string CardName => _cardName;
-
-
-    private string _cardDescription = "测试描述";
-    public override string CardDescription => _cardDescription;
-
-
-    private string _cardBackstory = "测试背景故事";
-    public override string CardBackstory => _cardBackstory;
-
-
-    private CardTrigger_Test _cardTrigger = new CardTrigger_Test(3);
-    public override CardTriggerAbstract CardTrigger => _cardTrigger;
-
-
     public override event EventHandler.RoleEventHandler ActionEvent;
     public override event EventHandler.FilterEventHandler FilterEvent;
 
+    /// <summary>
+    /// 实例化时初始化事件
+    /// </summary>
+    public Card_Test()
+    {
+        _cardName = "测试";
+        _cardDescription = "测试描述";
+        _cardBackstory = "测试背景";
+        _cardType = CardType.Attack;
+        _cardImage = Resources.Load<Sprite>("Textures/CardImage/test");
+        _cardTrigger = new CardTrigger_Test(3);
+
+        FilterEvent += CardFilters.RoleFilter;
+        ActionEvent += CardActions.HP_Harm;
+    }
     public override List<BaseInteractableObject> Action(List<BaseInteractableObject> _targets)
     {
-        //增加HP伤害动作
-        ActionEvent += CardActions.HP_Harm;
+        //目标筛选
+        _targets = EventHandler.Filter(_targets, FilterEvent);
+        //执行动作
         foreach (BaseInteractableObject each in _targets)
         {
             float result = EventHandler.Action(each, 40f, ActionEvent);//返回对该角色的最终伤害
         }
         //调用（待修改）
-        return _targets;//待修改
+        return _targets;
     }
 
     public override CardAbstract Clone()

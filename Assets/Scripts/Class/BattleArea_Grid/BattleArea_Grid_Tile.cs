@@ -19,6 +19,9 @@ public class BattleArea_Grid_Tile : MonoBehaviour
     [Header("Object")]
     public BaseInteractableObject objectOnIt;
 
+    [Header("Buff")]
+    public List<TileBuffAbstract> Buff = new List<TileBuffAbstract>();
+
     private void Start()
     {
         string[] strings = this.name.Split('_');

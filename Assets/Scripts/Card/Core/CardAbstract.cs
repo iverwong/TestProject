@@ -9,27 +9,33 @@ public abstract class CardAbstract
     /// <summary>
     /// 卡牌种类
     /// </summary>
-    public abstract CardType CardType { get; }
+    public CardType CardType { get => _cardType; }
+    public CardType _cardType;
     /// <summary>
     /// 卡牌图片
     /// </summary>
-    public abstract Sprite CardImage { get; }
+    public Sprite CardImage { get => _cardImage; }
+    public Sprite _cardImage;
     /// <summary>
     /// 卡牌名称
     /// </summary>
-    public abstract string CardName { get; }
+    public string CardName { get => _cardName; }
+    public string _cardName;
     /// <summary>
     /// 卡牌描述
     /// </summary>
-    public abstract string CardDescription { get; }
+    public string CardDescription { get => _cardDescription; }
+    public string _cardDescription;
     /// <summary>
     /// 卡牌背景故事
     /// </summary>
-    public abstract string CardBackstory { get; }
+    public string CardBackstory { get => _cardBackstory; }
+    public string _cardBackstory;
     /// <summary>
     /// 卡牌目标触发器
     /// </summary>
-    public abstract CardTriggerAbstract CardTrigger { get; }
+    public CardTriggerAbstract CardTrigger { get => _cardTrigger; }
+    public CardTriggerAbstract _cardTrigger;
     /// <summary>
     /// 抽取卡牌时触发
     /// </summary>

@@ -21,6 +21,8 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
     public float DEX;//Dexterity 灵巧
     public float WIL;//Willpower 意志
     public float LOG;//Logic 逻辑
+    public float OFF;//攻击方系数
+    public float DFF;//防守方系数
 
 
     private bool moveState = false;
@@ -35,6 +37,11 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
         CardPlay = new List<CardAbstract>(),
         Discard = new List<CardAbstract>();//牌库、待发牌、手牌、弃牌
     internal Object cardUI;//cardUI的预制件
+
+    public override BattleAreaCoordinate ObjectCoordinate { 
+        get => standOn.coordinate;
+        set => standOn = value.FindTile(); 
+    }
 
     private void Start()
     {
