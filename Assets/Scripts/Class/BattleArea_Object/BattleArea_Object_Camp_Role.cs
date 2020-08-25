@@ -121,33 +121,85 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
         }
         else throw new System.Exception("CardLibrary为空");
     }
-
+    /// <summary>
+    /// 进行抽卡
+    /// </summary>
+    /// <param name="_i">抽卡张数</param>
     public void DrawCard(int _i)
     {
         //循环抽卡_i次
         for (int i = 0; i < _i; i++)
         {
-            if(CardReady.Count > 0)//待发牌库中有牌时
+            //待发牌库中没有牌时，无法抽取
+            if(CardReady.Count == 0)
             {
-                //随机一个index
-                int randomIndex = Random.Range(0, CardReady.Count - 1);
-                CardAbstract currentCard = CardReady[randomIndex];
-                //添加到CardPlay中
-                CardPlay.Add(currentCard);
-                //从CardReady中移除
-                CardReady.Remove(currentCard);
-                //实例化CardUI预制件
-                GameObject prefebCardUI;
-                prefebCardUI = (GameObject)PrefabUtility.InstantiatePrefab(cardUI);
-                //载入UI资源
-                CardUI cardUIScript = prefebCardUI.GetComponent<CardUI>();
-                cardUIScript.card = currentCard;
-                cardUIScript.Init();
-                //将该UI资源传入StateMachine中统一管理
-                StateMachine.handleCardUI.Add(cardUIScript);
-                //排列handleCardUI列表，并移动到正确位置
-                StateMachine.OrderHandleCardUI();
+                Debug.Log("待发牌库中没有牌，停止抽牌");
+                break;
+            }
+            //获取牌库的第一张卡
+            CardAbstract currentCard = CardReady[0];
+            //添加到CardPlay中
+            CardPlay.Add(currentCard);
+            //从CardReady中移除
+            CardReady.Remove(currentCard);
+            //判断CardReady卡牌张数
+
+            //实例化CardUI预制件
+            GameObject prefebCardUI;
+            prefebCardUI = (GameObject)PrefabUtility.InstantiatePrefab(cardUI);
+            //载入UI资源
+            CardUI cardUIScript = prefebCardUI.GetComponent<CardUI>();
+            cardUIScript.card = currentCard;
+            cardUIScript.Init();
+            //将该UI资源传入StateMachine中统一管理
+            StateMachine.handleCardUI.Add(cardUIScript);
+            //排列handleCardUI列表，并移动到正确位置
+            StateMachine.OrderHandleCardUI();
+            if (CardReady.Count == 0)
+            {
+                ShuffleCard();//洗牌
             }
         }
     }
+    /// <summary>
+    /// 进行洗牌，将弃牌堆中的所有牌组乱序洗入待发牌库
+    /// </summary>
+    private void ShuffleCard()
+    {
+        int count = Discard.Count;
+        //当弃牌库中有牌时
+        if (count != 0)
+        {
+            //将所有Discard列表中的元素赋值到CardReady中
+            CardReady.AddRange(Discard);
+            //清空Discard
+            Discard.Clear();
+            //进行CardReady排序
+            for (int i = 0; i < count - 1; i++)
+            {
+                //随机一个整数
+                int random = Random.Range(i, count);
+                //将index为random的元素与第i个元素交换
+                CardAbstract temp = CardReady[random];
+                CardReady[random] = CardReady[i];
+                CardReady[i] = temp;
+            }
+        }
+        else
+        {
+            Debug.Log("弃牌库中没有牌，洗牌结束。");
+        }
+    }
+    /// <summary>
+    /// 对该角色造成伤害
+    /// </summary>
+    /// <param name="_value">造成的伤害值</param>
+    public void HPHarm(float _value)
+    {
+        //通过防御模式检验
+        //扣减血量
+        //调用血量变更后的事件多播
+    }
+
+
 }

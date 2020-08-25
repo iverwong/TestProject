@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\Class\CardUI\CardUI.cs" />
     <Compile Include="Assets\Scripts\Class\GameControl.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\BattleAreaCoordinate.cs" />
+    <Compile Include="Assets\Scripts\ScriptClass\DefenseModeAbstract.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\EventHandler.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\GameSettings.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\StateMachine.cs" />
