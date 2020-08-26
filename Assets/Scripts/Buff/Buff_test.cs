@@ -31,6 +31,7 @@ public class Buff_test : RoleBuffAbstract,IBuffHarm
 
     public override bool IsImpact(BaseInteractableObject _object)
     {
+        //仅对进攻方生效
         if (StateMachine.waitCommand == _object)
         {
             return true;

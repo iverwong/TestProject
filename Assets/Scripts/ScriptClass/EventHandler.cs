@@ -8,6 +8,11 @@ using UnityEngine;
 public static class EventHandler
 {
     /// <summary>
+    /// 属性值更改委托类，可交互物体属性值发生更改时可触发该事件，将更改后的属性值进行多播
+    /// </summary>
+    /// <param name="_value">改变后的属性值</param>
+    public delegate void ChangeValueEventHandler(float _value);
+    /// <summary>
     /// 角色委托类，对角色产生影响，用于伤害计算系统
     /// </summary>
     /// <param name="_interactableObject">触发响应的角色，用于获取角色的基本信息及属性</param>

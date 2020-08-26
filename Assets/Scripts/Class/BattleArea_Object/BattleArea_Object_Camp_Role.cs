@@ -3,18 +3,57 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class BattleArea_Object_Camp_Role : BaseInteractableObject
+public class BattleArea_Object_Camp_Role : BaseInteractableObject, IObjectCanBeHurt
 {
 
-    [Header("Main")]
-    //记录该角色所在地块
+    /// <summary>
+    /// 记录该角色所在地块
+    /// </summary>
     public BattleArea_Grid_Tile standOn;
+    private float _HP, _SP, _MP;
+    /// <summary>
+    /// Health Point 生命值
+    /// </summary>
+    public float HP
+    {
+        get => _HP;
+        set
+        {
+            //进行广播
+            HPChangedBroadcast(value);
+            //更改HP值
+            _HP += value;
+        }
+    }
+    /// <summary>
+    /// Stamina Point 活力值
+    /// </summary>
+    public float SP
+    {
+        get => _SP;
+        set
+        {
+            //进行广播
+            SPChangedBroadcast(value);
+            //更改SP值
+            _SP += value;
+        }
+    }
+    /// <summary>
+    /// Morale Point 士气值
+    /// </summary>
+    public float MP
+    {
+        get => _MP;
+        set
+        {
+            //进行广播
+            MPChangedBroadcast(value);
+            //更改MP值
+            _MP += value;
+        }
+    }
 
-    [Header("Base Attribute")]
-    public float HP;//Health Point 生命值
-    public float SP;//Stamina Point 活力值
-    public float MP;//Morale Point 士气值
-    [Header("Base Ability")]
     public float CON;//Constitution 体质
     public float STR;//Strengh 力量
     public float AGI;//Agility 敏捷
@@ -24,6 +63,7 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
     public float OFF;//攻击方系数
     public float DFF;//防守方系数
 
+    public DefenseModeAbstract defenseMode = null;//防御模式
 
     private bool moveState = false;
     private Vector3 moveTarget;
@@ -37,11 +77,14 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
         CardPlay = new List<CardAbstract>(),
         Discard = new List<CardAbstract>();//牌库、待发牌、手牌、弃牌
     internal Object cardUI;//cardUI的预制件
+    public event EventHandler.ChangeValueEventHandler HPChangedBroadcast,SPChangedBroadcast,MPChangedBroadcast;//属性发生变更时的广播
 
-    public override BattleAreaCoordinate ObjectCoordinate { 
+    public override BattleAreaCoordinate ObjectCoordinate
+    {
         get => standOn.coordinate;
-        set => standOn = value.FindTile(); 
+        set => standOn = value.FindTile();
     }
+
 
     private void Start()
     {
@@ -114,7 +157,7 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
     {
         if (CardLibrary != null)
         {
-            foreach(CardAbstract each in CardLibrary)
+            foreach (CardAbstract each in CardLibrary)
             {
                 CardReady.Add(each.Clone());
             }
@@ -131,7 +174,7 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
         for (int i = 0; i < _i; i++)
         {
             //待发牌库中没有牌时，无法抽取
-            if(CardReady.Count == 0)
+            if (CardReady.Count == 0)
             {
                 Debug.Log("待发牌库中没有牌，停止抽牌");
                 break;
@@ -190,16 +233,4 @@ public class BattleArea_Object_Camp_Role : BaseInteractableObject
             Debug.Log("弃牌库中没有牌，洗牌结束。");
         }
     }
-    /// <summary>
-    /// 对该角色造成伤害
-    /// </summary>
-    /// <param name="_value">造成的伤害值</param>
-    public void HPHarm(float _value)
-    {
-        //通过防御模式检验
-        //扣减血量
-        //调用血量变更后的事件多播
-    }
-
-
 }

@@ -93,10 +93,13 @@
     <Compile Include="Assets\Scripts\Class\BattleArea_Grid\SceneInitialization.cs" />
     <Compile Include="Assets\Scripts\Class\BattleArea_Object\BaseInteractableObject.cs" />
     <Compile Include="Assets\Scripts\Class\BattleArea_Object\BattleArea_Object_Camp_Role.cs" />
+    <Compile Include="Assets\Scripts\Class\BattleArea_Object\IObjectCanBeHurt.cs" />
     <Compile Include="Assets\Scripts\Class\CardUI\CardUI.cs" />
     <Compile Include="Assets\Scripts\Class\GameControl.cs" />
+    <Compile Include="Assets\Scripts\DefenseMode\Core\DefenseModeAbstract.cs" />
+    <Compile Include="Assets\Scripts\DefenseMode\Core\IDefenseModeHPHarm.cs" />
+    <Compile Include="Assets\Scripts\DefenseMode\DefenseMode_Test.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\BattleAreaCoordinate.cs" />
-    <Compile Include="Assets\Scripts\ScriptClass\DefenseModeAbstract.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\EventHandler.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\GameSettings.cs" />
     <Compile Include="Assets\Scripts\ScriptClass\StateMachine.cs" />

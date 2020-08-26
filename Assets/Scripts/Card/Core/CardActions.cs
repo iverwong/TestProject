@@ -61,6 +61,23 @@ public static class CardActions
             }
             else continue;
         }
+        //检验防御模式
+        if(_object is BattleArea_Object_Camp_Role)
+        {
+            BattleArea_Object_Camp_Role role = (BattleArea_Object_Camp_Role)_object;
+            //如果该角色激活了防御模式，且该防御模式继承了HPHarm接口
+            if(role.defenseMode != null && role.defenseMode is IDefenseModeHPHarm)
+            {
+                IDefenseModeHPHarm IdefenseMode = (IDefenseModeHPHarm)role.defenseMode;
+                //伤害结算
+                IdefenseMode.Settle(_value);
+            }
+            else//如果没有激活防御模式
+            {
+                role.HP = -_value;
+            }
+        }
+        //返回造成的最终伤害（未经过防御模式，用于UI展现）
         return _value;
     }
     /// <summary>
@@ -76,16 +93,24 @@ public static class CardActions
         return result;
     }
     /// <summary>
-    /// 计算防守方系数
+    /// 计算防守方系数，如果防守方不为Role类，则防守方系数为1（即返回原值）
     /// </summary>
     /// <param name="_object">计算方</param>
     /// <param name="_value">计算前值</param>
     /// <returns>计算结果</returns>
     private static float DefensiveFactor(BaseInteractableObject _object, float _value)
     {
-        BattleArea_Object_Camp_Role role = (BattleArea_Object_Camp_Role)_object;
-        float result = _value / role.DFF;
-        return result;
+        if(_object is BattleArea_Object_Camp_Role)
+        {
+            BattleArea_Object_Camp_Role role = (BattleArea_Object_Camp_Role)_object;
+            float result = _value / role.DFF;
+            return result;
+        }
+        else
+        {
+            return _value;
+        }
+
     }
     /// <summary>
     /// 计算双方属性加权
